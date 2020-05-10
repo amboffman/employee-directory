@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   getRandomEmployee: () => {
     return axios
-      .get("https://randomuser.me/api/?results=5000?nat=US")
+      .get("https://randomuser.me/api/?results=20&nat=US")
       .then((res) => {
         const employees = res.data.results;
         const results = employees.map((employee) => {
@@ -16,6 +16,7 @@ export default {
             phone: employee.phone
           };
         });
+        console.log(results);
         return results;
       });
   },
