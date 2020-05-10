@@ -6,7 +6,8 @@ const TableRowContext = React.createContext({
   city: "",
   state: "",
   email: "",
-  phone: ""
+  phone: "",
+  id: ""
 })
 
 export default TableRowContext;

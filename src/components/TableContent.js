@@ -7,23 +7,24 @@ import TableHeader from './TableHeader';
 function TableContent() {
 
   const [employee, setEmployee] = useState({});
+  const [employees, setEmployees] = useState({});
+
 
   useEffect(() => {
     loadEmployees();
   }, []);
 
   function loadEmployees() {
-    API.getRandomEmployee()
-      .then(randomEmployee => {
-        setEmployee(randomEmployee[0])
+    API.getRandomEmployees()
+      .then(randomEmployees => {
+        setEmployee(randomEmployees[0])
+        setEmployees(...randomEmployees)
       })
   }
   return (
-    <TableContentContext.Provider value={{ ...employee }}>
+    <TableContentContext.Provider value={{ ...employees }}>
       <TableHeader />
-      <tbody>
         <TableRow />
-      </tbody>
     </TableContentContext.Provider>
   );
 }
