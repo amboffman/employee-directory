@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import TableContent from './components/TableContent'
+import TableHeader from './components/TableHeader'
 import Button from 'react-bootstrap/Button';
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
         </Form>
       </Navbar>
       <Table striped bordered hover>
+        <TableHeader />
         <TableContent />
       </Table>
     </Container>

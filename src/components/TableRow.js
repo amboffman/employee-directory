@@ -1,30 +1,18 @@
-import React, { useContext } from 'react';
-import TableContentContext from '../utils/TableContentContext'
+import React from 'react';
 
-function TableRow() {
-  const { firstname, lastname, city, state, email, phone, id } = useContext(TableContentContext);
-  const context = useContext(TableContentContext);
 
-  const employeesArray = Object.keys(context).map(function(key) {
-    return [Number(key), context[key]];
-  });
-  
-  console.log(employeesArray)
-  const employees = employeesArray.map((employee) => (
-    <tr key={id}>
-      <td>{firstname}</td>
-      <td>{lastname}</td>
-      <td>{city}</td>
-      <td>{state}</td>
-      <td>{email}</td>
-      <td>{phone}</td>
+function TableData(props) {
+ return (
+    <tr key={props.key}>
+      <td>{props.firstname}</td>
+      <td>{props.lastname}</td>
+      <td>{props.city}</td>
+      <td>{props.state}</td>
+      <td>{props.email}</td>
+      <td>{props.phone}</td>
     </tr>
-  ))
-  return (
-    <tbody>
-      {employees}
-    </tbody >
-  )
+ )
+
 }
 
-export default TableRow;
+export default TableData;

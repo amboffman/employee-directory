@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import TableContentContext from '../utils/TableContentContext'
 import TableRow from './TableRow'
 import API from '../utils/API';
-import TableHeader from './TableHeader';
 
 function TableContent() {
 
-  const [employee, setEmployee] = useState({});
-  const [employees, setEmployees] = useState({});
+  const [employees, setEmployees] = useState([]);
 
 
   useEffect(() => {
@@ -17,15 +14,34 @@ function TableContent() {
   function loadEmployees() {
     API.getRandomEmployees()
       .then(randomEmployees => {
-        setEmployee(randomEmployees[0])
-        setEmployees(...randomEmployees)
+        setEmployees(randomEmployees.data.results.map(
+          employee => ({
+            firstname: employee.name.first,
+            lastname: employee.name.last,
+            city: employee.location.city,
+            state: employee.location.state,
+            email: employee.email,
+            phone: employee.phone,
+            id: employee.id.value
+          })
+        ))
       })
+      .catch((err) => console.log(err.message))
   }
   return (
-    <TableContentContext.Provider value={{ ...employees }}>
-      <TableHeader />
-        <TableRow />
-    </TableContentContext.Provider>
+    <tbody>
+      {employees.map((employee) => (
+        <TableRow
+          key={employee.id}
+          firstname={employee.firstname}
+          lastname={employee.lastname}
+          city={employee.city}
+          state={employee.state}
+          email={employee.email}
+          phone={employee.phone}
+        />
+      ))}
+    </tbody>
   );
 }
 
